@@ -27,9 +27,19 @@ describe('base32cc', ()=>{
         pass('Hello');
         pass('Hello!');
 
+        pass('abcdef');
+        pass('\x00abc\x00def');
+
         pass('000011112222333344445555666677778888');
         pass('000000001111111122222222333333334444444455555555666666667777777788888888');
         pass(Array(513).fill('!').join(''));
+
+        // multibase repo test cases
+        pass("Decentralize everything!!");
+        pass("yes mani !");
+        pass("hello world");
+        pass("\x00yes mani !");
+        pass("\x00\x00yes mani !");
     });
 
     it('packBit', () => {
