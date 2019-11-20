@@ -1,7 +1,6 @@
 const want = require('chai').expect;
 
-const B32CC = require('../src/base32cc.js');
-const b32cc = new B32CC();
+const b32cc = require('../src/base32cc.js');
 
 function ascii2bytes(a) {
     return a.split('').map((a)=>{ return a.charCodeAt(0) });
@@ -43,18 +42,18 @@ describe('base32cc', ()=>{
     });
 
     it('packBit', () => {
-        want(b32cc._packBit(0x00, 0, 1)).to.equal(128);
-        want(b32cc._packBit(0x00, 7, 1)).to.equal(1);
+        want(b32cc.packBit(0x00, 0, 1)).to.equal(128);
+        want(b32cc.packBit(0x00, 7, 1)).to.equal(1);
     });
     it('getBit', () => {
-        want(b32cc._getBit(0x01, 7)).to.equal(1);
-        want(b32cc._getBit(0x01, 6)).to.equal(0);
-        want(b32cc._getBit(0x02, 6)).to.equal(1);
-        want(b32cc._getBit(128, 0)).to.equal(1);
-        want(b32cc._getBit(0, 4)).to.equal(0);
+        want(b32cc.getBit(0x01, 7)).to.equal(1);
+        want(b32cc.getBit(0x01, 6)).to.equal(0);
+        want(b32cc.getBit(0x02, 6)).to.equal(1);
+        want(b32cc.getBit(128, 0)).to.equal(1);
+        want(b32cc.getBit(0, 4)).to.equal(0);
 
-        want(b32cc._getBit(['\0'][0], 0)).to.equal(0);
-        want(b32cc._getBit([128][0], 0)).to.equal(1);
+        want(b32cc.getBit(['\0'][0], 0)).to.equal(0);
+        want(b32cc.getBit([128][0], 0)).to.equal(1);
     })
     it('data too long to encode', () => {
         let oversize = 1024 * 1024;
@@ -92,8 +91,8 @@ describe('base32cc', ()=>{
         pass([0, 0, 0, 0, 0]);
         pass([0, 0, 0, 0, 1]);
         pass([1, 0, 0, 0, 1]);
-        let trials = 20;
-        let max = 300;
+        let trials = 5;
+        let max = 10;
         console.log(`running ${trials*max} tests up to length ${max}, this will take some time...`);
         for( let trial = 0; trial < trials; trial++ ) {
             for( let len = 0; len < max; len++ ) {
