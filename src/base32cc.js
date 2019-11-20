@@ -26,6 +26,9 @@ module.exports = class B32CC {
     encode (bytes, verbose) {
         if( verbose )
             console.log(`encode ${bytes}`);
+        if( bytes.length > (1024 * 1024) - 1 ) {
+            throw new Error("base32cc encode is not defined for data longer than ((10^20)-1) bytes.");
+        }
         const hash = sha256(bytes);
         const hashbytes = hex2bytes(hash);
         const bitlen = bytes.length * 8;
@@ -58,6 +61,9 @@ module.exports = class B32CC {
     decode (str, verbose) {
         if (verbose) {
             console.log(`decode ${str}`);
+        }
+        if( str.length > ((1024*1024 - 1) * (8/5)) ) {
+            throw new Error("base32cc decode is not defined for strings longer than 1677720 characters.");
         }
         let rem = str.length % 8;
         if (rem == 1 || rem == 3 || rem == 6) {

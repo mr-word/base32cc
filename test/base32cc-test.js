@@ -46,6 +46,12 @@ describe('base32cc', ()=>{
         want(b32cc._getBit(['\0'][0], 0)).to.equal(0);
         want(b32cc._getBit([128][0], 0)).to.equal(1);
     })
+    it('data too long to encode', () => {
+        let oversize = 1024 * 1024;
+        let bigBytes = Array(oversize).fill(0);
+        want(() => { b32cc.encode(bigBytes) }).to.throw;;
+        b32cc.encode(Array(oversize - 1).fill(0));
+    });
     it('encode', () => {
         // 00000001 (00..) -> ___00000 ___001(00)
         //                      (0->4)   (4->8)
@@ -76,7 +82,7 @@ describe('base32cc', ()=>{
         pass([0, 0, 0, 0, 0]);
         pass([0, 0, 0, 0, 1]);
         pass([1, 0, 0, 0, 1]);
-        let trials = 50;
+        let trials = 20;
         let max = 300;
         console.log(`running ${trials*max} tests up to length ${max}, this will take some time...`);
         for( let trial = 0; trial < trials; trial++ ) {
