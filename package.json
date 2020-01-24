@@ -1,7 +1,7 @@
 {
   "name": "b32x",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.0.2",
+  "main": "src/base32cx.js",
   "author": "Mr Word <noman.word@protonmail.com>",
   "license": "MIT",
   "scripts": {
