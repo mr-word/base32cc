@@ -99,5 +99,6 @@ module.exports = {
   getBit: getBit,
   packBit: packBit,
   encode: encode,
-  decode: decode
+  decode: decode,
+  hex2bytes: hex2bytes
 }
