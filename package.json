@@ -5,11 +5,13 @@
   "author": "Mr Word <noman.word@protonmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "fmt": "yarn run standard --fix"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "standard": "^14.3.1"
   },
   "dependencies": {
     "js-sha256": "^0.9.0"
