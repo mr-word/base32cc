@@ -5,9 +5,9 @@
 
 It uses the alphabet `456789ABCDEFGHIJKLMNOPQRSTUVWXYZ` to maximize the expected number of checksum bits.
 
-It's pronounced "base 32 **checks**" or shortened to "b32x". (Don't say "base32x", because that's a homophone for "base32hex".)
+Say "base 32 **checks**" or shorten to "b32x". (Don't say "base32x", because that's a homophone for "base32hex".)
 
-This is the first implementation. It is not efficient and the canonical tests need to be verified. Please consider making your own implementation.
+This is the first implementation. It is not yet efficient and the canonical tests need to be verified. Please consider making your own implementation.
 
 Usage
 ---
