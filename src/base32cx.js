@@ -21,7 +21,7 @@ function packBit (_byte, index, bit) {
 
 function encode (bytes) {
   if (bytes.length > (1024 * 1024) - 1) {
-    throw new Error('base32cc encode is not defined for data longer than 2^20-1 bytes.')
+    throw new Error('base32cx encode is not defined for data longer than 2^20-1 bytes.')
   }
   const hash = sha256(bytes)
   const hashbytes = hex2bytes(hash)
