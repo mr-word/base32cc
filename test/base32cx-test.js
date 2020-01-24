@@ -40,27 +40,27 @@ describe('base32cx', () => {
     pass('\x00yes mani !')
     pass('\x00\x00yes mani !')
   })
-  
-  it('values from the wild', ()=>{
+
+  it('values from the wild', () => {
     console.log('160-bit address')
     console.log('1MrWordHHqEDFQUjQ59xFNSA94759VJC35 (version byte + 160bit + 4 checksum bytes)')
-    let mrWordHex = 'E4BFC7B7C4D354282F1DEA549B6776A740853B2D'
+    const mrWordHex = 'E4BFC7B7C4D354282F1DEA549B6776A740853B2D'
     console.log(mrWordHex, '(hex)')
-    let mrWordBytes = b32x.hex2bytes(mrWordHex)
+    const mrWordBytes = b32x.hex2bytes(mrWordHex)
     let encoded = b32x.encode(mrWordBytes)
     console.log(encoded, '(base32x)')
     let decoded = b32x.decode(encoded)
     want(decoded).to.deep.equal(mrWordBytes)
 
     console.log('256-bit hash')
-    let someHashHex = 'bbb464a9804ce0caa2c344ec7c98c70c69722113cda2393779fbc7f0cc116673'
+    const someHashHex = 'bbb464a9804ce0caa2c344ec7c98c70c69722113cda2393779fbc7f0cc116673'
     console.log(someHashHex, '(hex)')
-    let bytes = b32x.hex2bytes(someHashHex)
+    const bytes = b32x.hex2bytes(someHashHex)
     encoded = b32x.encode(bytes)
     console.log(encoded, '(base32x)')
     decoded = b32x.decode(encoded)
     want(decoded).to.deep.equal(bytes)
-  });
+  })
 
   it('packBit', () => {
     want(b32x.packBit(0x00, 0, 1)).to.equal(128)
@@ -125,4 +125,19 @@ describe('base32cx', () => {
       }
     }
   }).timeout(0)
+
+  it('usage from readme', ()=>{
+      let hex = 'ff00f0f0'
+      let encoded = b32x.fromHex(hex)
+      console.log(encoded)
+      let decoded = b32x.toHex(encoded)
+      want(decoded).to.deep.equal(hex)
+
+      let bytes = [255, 0, 240, 240]
+      encoded = b32x.fromBytes(bytes)
+      console.log(encoded)
+      decoded = b32x.toBytes(encoded)
+      want(decoded).to.deep.equal(bytes)
+
+  })
 })

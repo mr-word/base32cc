@@ -1,4 +1,6 @@
 const sha256 = require('js-sha256').sha256
+const ab2h = require('array-buffer-to-hex')
+const h2ab = require('hex-to-array-buffer')
 
 const alphabet = '456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -17,6 +19,19 @@ function getBit (_byte, index) {
 
 function packBit (_byte, index, bit) {
   return _byte | (0xff & (bit << (7 - index % 8)))
+}
+
+function fromHex(hex) {
+    return encode(hex2bytes(hex))
+}
+function toHex(base32cx) {
+    return ab2h(Buffer.from(decode(base32cx)))
+}
+function fromBytes(bytes) {
+    return encode(bytes)
+}
+function toBytes(base32cx) {
+    return decode(base32cx)
 }
 
 function encode (bytes) {
@@ -96,9 +111,13 @@ function decode (str) {
 }
 
 module.exports = {
+  fromHex,
+  toHex,
+  fromBytes,
+    toBytes,
   getBit: getBit,
   packBit: packBit,
   encode: encode,
   decode: decode,
-  hex2bytes: hex2bytes
+  hex2bytes: hex2bytes,
 }
